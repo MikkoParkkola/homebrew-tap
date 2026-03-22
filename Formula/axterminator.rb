@@ -2,7 +2,7 @@ class Axterminator < Formula
   desc "Background-first macOS GUI automation with MCP server support"
   homepage "https://github.com/MikkoParkkola/axterminator"
   url "https://github.com/MikkoParkkola/axterminator/archive/refs/tags/v0.8.0.tar.gz"
-  sha256 "aaea37fb5b96aaa82400e6160b2073996538cc3f504231d834aae467b6de8c9b"
+  sha256 "d53ca4b413c89af12c44688de927dd62596ea2c30c5f98aa4d8bf3f17592a52b"
   version "0.8.0"
   license "MIT OR Apache-2.0"
 
