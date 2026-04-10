@@ -1,5 +1,5 @@
 class McpGateway < Formula
-  desc "Universal MCP Gateway — single-port multiplexing with Meta-MCP for ~95% context token savings"
+  desc "Universal MCP gateway — single port for all your MCP servers, ~95% token savings"
   homepage "https://github.com/MikkoParkkola/mcp-gateway"
   version "2.6.0"
   license "MIT"
