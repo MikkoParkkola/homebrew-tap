@@ -43,18 +43,18 @@ Each install downloads a single pre-built binary for your architecture
 (arm64 or x86_64, macOS or Linux) and finishes in 1–3 seconds. No build
 toolchain required.
 
-## Wire MCP servers into Claude Desktop
+## Wire MCP servers into your AI client
 
 `trvl` and `axterminator` ship as MCP servers. After installing them,
-you can wire them into Claude Desktop without editing any JSON:
+wire them into your AI client without editing any JSON:
 
 ```bash
-trvl mcp install-claude-desktop          # adds trvl as an MCP server
-trvl mcp install-claude-desktop --client cursor       # or Cursor
-trvl mcp install-claude-desktop --client claude-code  # or Claude Code
+trvl mcp install                         # Claude Desktop (default)
+trvl mcp install --client cursor         # Cursor / Windsurf
+trvl mcp install --client claude-code    # Claude Code
 ```
 
-Then restart Claude Desktop. Your assistant now has 32 travel tools.
+Then restart your client. Your assistant now has 33 travel tools.
 
 ## Update everything
 
