@@ -5,21 +5,21 @@
 class Trvl < Formula
   desc "Google Flights + Hotels from your terminal — MCP server, 32 tools, no API keys"
   homepage "https://github.com/MikkoParkkola/trvl"
-  version "0.3.11"
+  version "0.3.12"
   license "PolyForm-Noncommercial-1.0.0"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/MikkoParkkola/trvl/releases/download/v0.3.11/trvl_0.3.11_darwin_amd64.tar.gz"
-      sha256 "8ad77c62c669ee688d0f053420d5f3956cb0869303f17ad1e1339faf99e21a56"
+      url "https://github.com/MikkoParkkola/trvl/releases/download/v0.3.12/trvl_0.3.12_darwin_amd64.tar.gz"
+      sha256 "b41c3b17b1ed552542d7b40f3568677c1cc52bf79f70897ce768ef5d429bbdac"
 
       define_method(:install) do
         bin.install "trvl"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/MikkoParkkola/trvl/releases/download/v0.3.11/trvl_0.3.11_darwin_arm64.tar.gz"
-      sha256 "b266a6d507c94ecb30423aa3ce041707bdc6ac2c16ba11beb4ab772f1f62b8d3"
+      url "https://github.com/MikkoParkkola/trvl/releases/download/v0.3.12/trvl_0.3.12_darwin_arm64.tar.gz"
+      sha256 "c2fa379088da5f35993bd5c1626d2bc5d5f2fde2d78c58507a8b346bded820dd"
 
       define_method(:install) do
         bin.install "trvl"
@@ -29,15 +29,15 @@ class Trvl < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/MikkoParkkola/trvl/releases/download/v0.3.11/trvl_0.3.11_linux_amd64.tar.gz"
-      sha256 "29c05b8e677e5c5e54d765a4d764b66cf3729388ede7d21bf431fa512e4d3864"
+      url "https://github.com/MikkoParkkola/trvl/releases/download/v0.3.12/trvl_0.3.12_linux_amd64.tar.gz"
+      sha256 "a1904407f13e25c5d515e0bc9093c994306d1aae4882fdd4e941723b8c77e61d"
       define_method(:install) do
         bin.install "trvl"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/MikkoParkkola/trvl/releases/download/v0.3.11/trvl_0.3.11_linux_arm64.tar.gz"
-      sha256 "951d9cbe94fa67af515f8a4add156d2be37ccec01342d59faae0558ce1b00351"
+      url "https://github.com/MikkoParkkola/trvl/releases/download/v0.3.12/trvl_0.3.12_linux_arm64.tar.gz"
+      sha256 "973cba3a7031a899dde93ddca9de3c1db750182589a944b17ca5ecebf493ae92"
       define_method(:install) do
         bin.install "trvl"
       end
