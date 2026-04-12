@@ -18,18 +18,20 @@ This repository contains Homebrew formula metadata only.
 
 ## Local Validation
 
-If you want Homebrew to evaluate this local checkout as a tap:
+If you want Homebrew to evaluate this local checkout as a tap, use the same
+temporary tap alias as CI so you do not overwrite an existing
+`MikkoParkkola/tap` entry in your local Homebrew config:
 
 ```bash
-brew tap MikkoParkkola/tap "$PWD"
-brew style MikkoParkkola/tap
-brew audit --strict --online --tap MikkoParkkola/tap
+brew tap local/homebrew-quality "$PWD"
+brew style local/homebrew-quality
+brew audit --strict --online --tap local/homebrew-quality
 ```
 
 When you are done, you can remove the local tap with:
 
 ```bash
-brew untap MikkoParkkola/tap
+brew untap local/homebrew-quality
 ```
 
 ## Pull Requests

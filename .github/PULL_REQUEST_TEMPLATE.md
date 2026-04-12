@@ -3,14 +3,14 @@
 ## How to test
 
 ```bash
-brew tap MikkoParkkola/tap "$PWD"
-brew style MikkoParkkola/tap
-brew audit --strict --online --tap MikkoParkkola/tap
+brew tap local/homebrew-quality "$PWD"
+brew style local/homebrew-quality
+brew audit --strict --online --tap local/homebrew-quality
 ```
 
 ## Checklist
 
 - [ ] Formula URLs, versions, and checksums are in sync
-- [ ] `brew style MikkoParkkola/tap` passes
-- [ ] `brew audit --strict --online --tap MikkoParkkola/tap` passes
+- [ ] `brew style local/homebrew-quality` passes
+- [ ] `brew audit --strict --online --tap local/homebrew-quality` passes
 - [ ] README/docs updated if needed
