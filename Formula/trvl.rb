@@ -45,6 +45,6 @@ class Trvl < Formula
   end
 
   test do
-    system "#{bin}/trvl", "version"
+    assert_match version.to_s, shell_output("#{bin/"trvl"} version")
   end
 end

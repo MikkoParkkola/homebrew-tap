@@ -35,6 +35,6 @@ class Nowifi < Formula
   end
 
   test do
-    assert_match "nowifi", shell_output("#{bin}/nowifi --version")
+    assert_match version.to_s, shell_output("#{bin/"nowifi"} --version")
   end
 end

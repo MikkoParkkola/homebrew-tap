@@ -43,6 +43,6 @@ class McpGateway < Formula
   end
 
   test do
-    assert_match "mcp-gateway", shell_output("#{bin}/mcp-gateway --version")
+    assert_match version.to_s, shell_output("#{bin/"mcp-gateway"} --version")
   end
 end
