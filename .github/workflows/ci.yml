@@ -5,6 +5,9 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: "17 5 * * 1"
 
 permissions:
   contents: read
@@ -27,3 +30,19 @@ jobs:
 
       - name: Audit
         run: brew audit --strict --online --tap local/homebrew-quality
+
+  verify-downloads:
+    name: Verify downloads (${{ matrix.formula }})
+    runs-on: macos-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        formula: [axterminator, mcp-gateway, nab, nowifi, trvl]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Tap local repository
+        run: brew tap local/homebrew-quality "$GITHUB_WORKSPACE"
+
+      - name: Fetch release artifact
+        run: HOMEBREW_NO_INSTALL_FROM_API=1 brew fetch --force --retry "local/homebrew-quality/${{ matrix.formula }}"
