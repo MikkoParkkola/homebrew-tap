@@ -1,7 +1,8 @@
 # MikkoParkkola Homebrew Tap
 
 Pre-built command-line tools for macOS and Linux. One command to install,
-no toolchains, no `cargo build`, no `go install`, no `sudo`.
+no `cargo build`, no `go install`, no `sudo`. `axterminator` is currently
+macOS-only; the other formulae support both macOS and Linux.
 
 ```bash
 brew tap MikkoParkkola/tap
@@ -39,9 +40,9 @@ brew install MikkoParkkola/tap/nab
 brew install MikkoParkkola/tap/nowifi
 ```
 
-Each install downloads a single pre-built binary for your architecture
-(arm64 or x86_64, macOS or Linux) and finishes in 1–3 seconds. No build
-toolchain required.
+Each supported install downloads a pre-built release artifact for your
+architecture and finishes in seconds. No build toolchain required.
+`axterminator` is currently available as a pre-built formula on macOS only.
 
 ## Wire MCP servers into your AI client
 
