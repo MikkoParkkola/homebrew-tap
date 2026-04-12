@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+env:
+  HOMEBREW_NO_AUTO_UPDATE: "1"
+  HOMEBREW_NO_ENV_HINTS: "1"
+
+jobs:
+  validate-formulae:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Tap local repository
+        run: brew tap local/homebrew-quality "$GITHUB_WORKSPACE"
+
+      - name: Style
+        run: brew style local/homebrew-quality
+
+      - name: Audit
+        run: brew audit --strict --online --tap local/homebrew-quality
