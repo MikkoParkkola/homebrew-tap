@@ -44,6 +44,10 @@ class Trvl < Formula
     end
   end
 
+  def post_install
+    system bin/"trvl", "upgrade", "--quiet"
+  end
+
   test do
     assert_match version.to_s, shell_output("#{bin/"trvl"} version")
   end

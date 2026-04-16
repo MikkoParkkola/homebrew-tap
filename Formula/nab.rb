@@ -41,6 +41,10 @@ class Nab < Formula
     end
   end
 
+  def post_install
+    system bin/"nab", "upgrade", "--quiet"
+  end
+
   test do
     assert_match "nab", shell_output("#{bin}/nab --version")
   end

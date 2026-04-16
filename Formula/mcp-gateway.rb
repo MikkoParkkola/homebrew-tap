@@ -42,6 +42,10 @@ class McpGateway < Formula
     end
   end
 
+  def post_install
+    system bin/"mcp-gateway", "upgrade", "--quiet"
+  end
+
   test do
     assert_match version.to_s, shell_output("#{bin/"mcp-gateway"} --version")
   end

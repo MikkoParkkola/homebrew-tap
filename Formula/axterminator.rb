@@ -21,6 +21,10 @@ class Axterminator < Formula
     end
   end
 
+  def post_install
+    system bin/"axterminator", "upgrade", "--quiet"
+  end
+
   test do
     assert_match "accessibility", shell_output("#{bin}/axterminator check")
   end
