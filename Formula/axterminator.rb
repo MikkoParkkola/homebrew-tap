@@ -1,28 +1,20 @@
 class Axterminator < Formula
   desc "Background-first macOS GUI automation with MCP server support"
   homepage "https://github.com/MikkoParkkola/axterminator"
-  license any_of: ["MIT", "Apache-2.0"]
+  url "https://github.com/MikkoParkkola/axterminator/archive/refs/tags/v0.9.2.tar.gz"
+  sha256 "b0f56ae37156f250d18bd2d5661429ec2db50725c71a2a512f7c217763252735"
+  version "0.9.2"
+  license "MIT OR Apache-2.0"
 
   depends_on :macos
-
-  if Hardware::CPU.arm?
-    url "https://github.com/MikkoParkkola/axterminator/releases/download/v0.9.0/axterminator-aarch64-apple-darwin"
-    sha256 "42f0f40077a351abdda16870aeb1c39a4a01f29cb61f3ac7fbbdebb263c3268d"
-  else
-    url "https://github.com/MikkoParkkola/axterminator/releases/download/v0.9.0/axterminator-x86_64-apple-darwin"
-    sha256 "62eb29e752d9157de3d07f86aada41e464d898d17cb6dc4aa13e9cf07529e643"
-  end
+  depends_on "rust" => :build
 
   def install
-    if Hardware::CPU.arm?
-      bin.install "axterminator-aarch64-apple-darwin" => "axterminator"
-    else
-      bin.install "axterminator-x86_64-apple-darwin" => "axterminator"
-    end
-  end
-
-  def post_install
-    system bin/"axterminator", "upgrade", "--quiet"
+    system "cargo", "install",
+      "--locked",
+      "--features", "cli",
+      "--root", prefix,
+      "--path", "."
   end
 
   test do
