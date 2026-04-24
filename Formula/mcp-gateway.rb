@@ -1,28 +1,28 @@
 class McpGateway < Formula
   desc "Universal MCP gateway — single port for all your MCP servers, ~95% token savings"
   homepage "https://github.com/MikkoParkkola/mcp-gateway"
-  version "2.9.1"
+  version "2.10.1"
   license "MIT"
 
   on_macos do
     on_arm do
-      url "https://github.com/MikkoParkkola/mcp-gateway/releases/download/v2.9.1/mcp-gateway-darwin-arm64"
-      sha256 "ddc26345e541a983210a919fd2769abbe99a0e7a61e97ab569d05514a8a0998e"
+      url "https://github.com/MikkoParkkola/mcp-gateway/releases/download/v2.10.1/mcp-gateway-darwin-arm64"
+      sha256 "c729adf6586ee4a7e6a94692cecbfa035b65087b34484b3747161af4e67625e6"
     end
     on_intel do
-      url "https://github.com/MikkoParkkola/mcp-gateway/releases/download/v2.9.1/mcp-gateway-darwin-x86_64"
-      sha256 "7a3608773494a84dc7bf0bc5de67e794987746e91e91ebc8c7bc8481ad6abbf0"
+      url "https://github.com/MikkoParkkola/mcp-gateway/releases/download/v2.10.1/mcp-gateway-darwin-x86_64"
+      sha256 "def76c931cd1ea88dfcba1d5b77f719530c1dd0053f644c78fcedc2f7d188abd"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/MikkoParkkola/mcp-gateway/releases/download/v2.9.1/mcp-gateway-linux-aarch64"
-      sha256 "68998f3dedbf01dfa6a39f379550e33fc6ebbdd658034a52f199549899878503"
+      url "https://github.com/MikkoParkkola/mcp-gateway/releases/download/v2.10.1/mcp-gateway-linux-aarch64"
+      sha256 "8a35b4663d1ba6ef94dc251dad5fe0b78f636a0ce9275f9c4343d57156fa2e3b"
     end
     on_intel do
-      url "https://github.com/MikkoParkkola/mcp-gateway/releases/download/v2.9.1/mcp-gateway-linux-x86_64"
-      sha256 "64d4ac7628dfa8b1453f4dfccc482092c13da276eca1e57845d82f6fd5f380ad"
+      url "https://github.com/MikkoParkkola/mcp-gateway/releases/download/v2.10.1/mcp-gateway-linux-x86_64"
+      sha256 "5799d575daad4d366a0e6f4584ea04b0756b80407b55ade2d0e63b43cf15e19d"
     end
   end
 
@@ -43,7 +43,9 @@ class McpGateway < Formula
   end
 
   def post_install
-    system bin/"mcp-gateway", "upgrade", "--quiet"
+    system "xattr", "-dr", "com.apple.quarantine", "#{bin}/mcp-gateway" if OS.mac?
+  rescue
+    nil
   end
 
   test do
