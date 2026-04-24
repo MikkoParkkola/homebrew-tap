@@ -1,27 +1,28 @@
 class Nab < Formula
   desc "Token-optimized HTTP client for LLMs — fetches any URL as clean markdown"
   homepage "https://github.com/MikkoParkkola/nab"
+  version "0.8.4"
   license "MIT"
 
   on_macos do
     on_arm do
-      url "https://github.com/MikkoParkkola/nab/releases/download/v0.8.0/nab-aarch64-apple-darwin"
-      sha256 "a59238f7e39e2e8c05e960d54abcafe1786dd69252021a95b1c4dd696cff2360"
+      url "https://github.com/MikkoParkkola/nab/releases/download/v0.8.4/nab-aarch64-apple-darwin"
+      sha256 "bd3f5e548abe4782d5d41fd999b5b2eddc98c0e710772940e2120106bf539cc4"
     end
     on_intel do
-      url "https://github.com/MikkoParkkola/nab/releases/download/v0.8.0/nab-x86_64-apple-darwin"
-      sha256 "c8f72c252dd330f5e68f2f39ae146258dc8567e738cf7153ca88ce449de969c8"
+      url "https://github.com/MikkoParkkola/nab/releases/download/v0.8.4/nab-x86_64-apple-darwin"
+      sha256 "107ae1ca0c0d530df23a81ae595d6652cc29c4210e0103f13e20e0a7e1166348"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/MikkoParkkola/nab/releases/download/v0.8.0/nab-aarch64-unknown-linux-gnu"
-      sha256 "fc030caa49380a1599cf237dbddcf3fde81f113f960a0946904ccd4793727869"
+      url "https://github.com/MikkoParkkola/nab/releases/download/v0.8.4/nab-aarch64-unknown-linux-gnu"
+      sha256 "d85a2d129b40a754f2a248fe819a4edbbf8f81a1c8af95030fb8c00964ab26ab"
     end
     on_intel do
-      url "https://github.com/MikkoParkkola/nab/releases/download/v0.8.0/nab-x86_64-unknown-linux-gnu"
-      sha256 "657a89e6bee98d1d74f6b0c92964898d51a938270cfc5bb44cf409b1ffa92869"
+      url "https://github.com/MikkoParkkola/nab/releases/download/v0.8.4/nab-x86_64-unknown-linux-gnu"
+      sha256 "1b747547b932b6169a9fa14bbb241c200633069738a081378c0386194f295846"
     end
   end
 
@@ -42,7 +43,9 @@ class Nab < Formula
   end
 
   def post_install
-    system bin/"nab", "upgrade", "--quiet"
+    system "xattr", "-dr", "com.apple.quarantine", "#{bin}/nab" if OS.mac?
+  rescue
+    nil
   end
 
   test do
