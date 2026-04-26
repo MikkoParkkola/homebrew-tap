@@ -1,7 +1,6 @@
 class Nab < Formula
   desc "Token-optimized HTTP client for LLMs — fetches any URL as clean markdown"
   homepage "https://github.com/MikkoParkkola/nab"
-  version "0.8.5"
   license "MIT"
 
   on_macos do
