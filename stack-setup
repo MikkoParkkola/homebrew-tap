@@ -1,0 +1,180 @@
+#!/usr/bin/env bash
+# stack-setup — Auto-configures all sovereign-stack MCP servers for your AI client.
+#
+# Detects the installed AI client(s) and runs each tool's native mcp install
+# command.  Safe to re-run — each tool's installer is idempotent.
+#
+# Usage:
+#   stack-setup                    auto-detect client, install all
+#   stack-setup --dry-run          preview without writing
+#   stack-setup --clients c1,c2    target specific clients
+#   stack-setup --help             show this message
+#
+# Supported clients:
+#   claude-desktop, claude-code, cursor, windsurf, codex, vscode, zed, gemini
+
+set -euo pipefail
+
+DRY_RUN=false
+CLIENTS=""
+
+usage() {
+  grep '^#' "$0" | grep -v '^#!/' | sed 's/^# \?//'
+  exit 0
+}
+
+# ─── Parse args ─────────────────────────────────────────────────────────────
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --dry-run) DRY_RUN=true; shift ;;
+    --clients) CLIENTS="$2"; shift 2 ;;
+    --help|-h) usage ;;
+    *) echo "Unknown flag: $1"; usage ;;
+  esac
+done
+
+# ─── Auto-detect client ─────────────────────────────────────────────────────
+
+detect_clients() {
+  local detected=""
+
+  # Claude Desktop (macOS)
+  if [[ -d "$HOME/Library/Application Support/Claude" ]]; then
+    detected="${detected}claude-desktop,"
+  fi
+
+  # Claude Code (CLI)
+  if command -v claude &>/dev/null; then
+    detected="${detected}claude-code,"
+  fi
+
+  # Cursor
+  if [[ -d "$HOME/Library/Application Support/Cursor" ]] || command -v cursor &>/dev/null; then
+    detected="${detected}cursor,"
+  fi
+
+  # Windsurf
+  if [[ -d "$HOME/.windsurf" ]] || command -v windsurf &>/dev/null; then
+    detected="${detected}windsurf,"
+  fi
+
+  # Codex (OpenAI)
+  if command -v codex &>/dev/null; then
+    detected="${detected}codex,"
+  fi
+
+  # VS Code / VS Code Insiders
+  if command -v code &>/dev/null; then
+    detected="${detected}vscode,"
+  fi
+
+  # Zed
+  if command -v zed &>/dev/null || command -v zeditor &>/dev/null; then
+    detected="${detected}zed,"
+  fi
+
+  # Gemini CLI
+  if command -v gemini &>/dev/null; then
+    detected="${detected}gemini,"
+  fi
+
+  echo "${detected%,}"
+}
+
+# ─── Install for one tool across all target clients ─────────────────────────
+
+install_tool() {
+  local tool="$1"
+  local install_cmd="$2"
+
+  if ! command -v "$tool" &>/dev/null && ! command -v "${tool}-mcp" &>/dev/null; then
+    echo "  ⏭  $tool: not installed — skipping"
+    return 0
+  fi
+
+  for client in ${CLIENTS//,/ }; do
+    echo "  🔧 $tool → $client"
+    if [[ "$DRY_RUN" == "true" ]]; then
+      echo "     [dry-run] $install_cmd $client"
+    else
+      $install_cmd "$client" 2>&1 | sed 's/^/     /' || echo "     ⚠️  $tool → $client failed (non-fatal)"
+    fi
+  done
+}
+
+# ─── Main ────────────────────────────────────────────────────────────────────
+
+if [[ "$1" == "--help" ]] || [[ "$1" == "-h" ]]; then
+  usage
+fi
+
+if [[ -z "$CLIENTS" ]]; then
+  CLIENTS=$(detect_clients)
+fi
+
+if [[ -z "$CLIENTS" ]]; then
+  echo "❌ No AI clients detected. Run with --clients to specify manually:"
+  echo "   stack-setup --clients claude-code,cursor"
+  exit 1
+fi
+
+echo ""
+echo "╔══════════════════════════════════════════════════╗"
+echo "║       Sovereign AI Stack — MCP Setup             ║"
+echo "╠══════════════════════════════════════════════════╣"
+echo "║ Clients: ${CLIENTS}"
+[[ "$DRY_RUN" == "true" ]] && echo "║ Mode:    dry-run (no changes written)"
+echo "╚══════════════════════════════════════════════════╝"
+echo ""
+
+# ─── mcp-gateway ────────────────────────────────────────────────────────────
+
+echo "📡 mcp-gateway (universal tool gateway)"
+install_tool "mcp-gateway" "mcp-gateway setup wizard --configure-client --client"
+
+# ─── nab ─────────────────────────────────────────────────────────────────────
+
+echo ""
+echo "🌐 nab (web fetch + ASR + URL watch)"
+install_tool "nab" "nab mcp install --client"
+
+# ─── trvl ────────────────────────────────────────────────────────────────────
+
+echo ""
+echo "✈️  trvl (travel search — flights, hotels, ground)"
+install_tool "trvl" "trvl mcp install --client"
+
+# ─── axterminator (macOS only) ───────────────────────────────────────────────
+
+if [[ "$(uname -s)" == "Darwin" ]]; then
+  echo ""
+  echo "🖥️  axterminator (macOS GUI automation)"
+  install_tool "axterminator" "axterminator mcp install --client"
+fi
+
+# ─── hebb (if installed from source) ─────────────────────────────────────────
+
+echo ""
+echo "🧠 hebb (neuroscience-inspired memory)"
+if command -v hebb-mcp &>/dev/null || command -v hebb &>/dev/null; then
+  install_tool "hebb" "hebb init --client"
+else
+  echo "  ⏭  hebb: not installed — build from source:"
+  echo "     cargo install --git https://github.com/MikkoParkkola/hebb"
+  echo "     hebb init"
+fi
+
+# ─── Summary ─────────────────────────────────────────────────────────────────
+
+echo ""
+echo "╔══════════════════════════════════════════════════╗"
+echo "║  ✅ Setup complete. Restart your AI client.      ║"
+echo "║                                                  ║"
+echo "║  Verify: ask your AI to run these tools:         ║"
+echo "║    • gateway_search_tools \"weather\"              ║"
+echo "║    • nab_fetch https://news.ycombinator.com       ║"
+echo "║    • search_flights HEL NRT 2026-07-01            ║"
+echo "║    • ax_list_apps (macOS)                         ║"
+echo "║    • hebb_kv_set namespace=test key=hello ...     ║"
+echo "╚══════════════════════════════════════════════════╝"

@@ -19,9 +19,24 @@ with a single `brew install` line.
 | [`axterminator`](https://github.com/MikkoParkkola/axterminator) | Background-first macOS GUI automation, MCP server, 30 tools, audio/camera capture |
 | [`mcp-gateway`](https://github.com/MikkoParkkola/mcp-gateway) | Universal MCP gateway — single-port multiplexing, ~95% context-token savings |
 | [`nab`](https://github.com/MikkoParkkola/nab) | Token-optimized HTTP client for LLMs — fetches any URL as clean markdown |
-| [`nowifi`](https://github.com/MikkoParkkola/nowifi) | One-command captive-portal bypass, 27 techniques, restores everything on Ctrl+C |
+| [`nowifi`](https://github.com/MikkoParkkola/nowifi) | One-command captive-portal bypass, 43 techniques, restores everything on Ctrl+C |
+| **[`stack`](#sovereign-stack)** | **Metapackage — one command installs everything above** |
 
-## Install
+## One command — the whole stack
+
+```bash
+brew tap MikkoParkkola/tap
+brew install MikkoParkkola/tap/stack
+stack-setup
+```
+
+Installs mcp-gateway, nab, trvl, and axterminator (macOS) in one command.
+`stack-setup` auto-detects your AI client and wires all four MCP servers.
+Restart your client. Done.
+
+(hebb — the memory server — is coming soon via the same tap.)
+
+## Install individually
 
 ```bash
 # Travel
@@ -46,16 +61,25 @@ architecture and finishes in seconds. No build toolchain required.
 
 ## Wire MCP servers into your AI client
 
-`trvl` and `axterminator` ship as MCP servers. After installing them,
-wire them into your AI client without editing any JSON:
+After installing, use the automatic setup script:
+
+```bash
+stack-setup
+```
+
+Or wire individual tools manually:
 
 ```bash
 trvl mcp install                         # Claude Desktop (default)
-trvl mcp install --client cursor         # Cursor / Windsurf
+trvl mcp install --client cursor         # Cursor
 trvl mcp install --client claude-code    # Claude Code
+axterminator mcp install                 # Claude Desktop (default)
+axterminator mcp install --client claude-code
+mcp-gateway setup wizard --configure-client
+nab mcp install
 ```
 
-Then restart your client. Your assistant now has 33 travel tools.
+Then restart your client.
 
 ## Update everything
 
@@ -66,7 +90,7 @@ brew update && brew upgrade
 ## Uninstall
 
 ```bash
-brew uninstall trvl axterminator mcp-gateway nab nowifi
+brew uninstall stack trvl axterminator mcp-gateway nab nowifi
 brew untap MikkoParkkola/tap
 ```
 
