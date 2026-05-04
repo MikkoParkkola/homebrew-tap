@@ -1,24 +1,22 @@
 class Stack < Formula
-  desc "Sovereign AI stack — one command installs mcp-gateway, hebb, nab, axterminator, and trvl"
+  desc "Sovereign AI stack metapackage"
   homepage "https://github.com/MikkoParkkola/homebrew-tap"
+  url "https://raw.githubusercontent.com/MikkoParkkola/homebrew-tap/ab392337077fa8b0316b6fc7125fafab41d9d732/stack-setup"
   version "1.0.0"
+  sha256 "c737a7efbf2472c21f04b91460aa1c8eacaa158b8887ad4f385a4dccea697732"
   license "MIT"
 
   # Metapackage — depends on the four public tools in the sovereign stack.
   # hebb is not yet available via Homebrew (pending public release).
   # Installing this formula pulls every available dependency via Homebrew.
+  depends_on "MikkoParkkola/tap/axterminator" if OS.mac?
   depends_on "MikkoParkkola/tap/mcp-gateway"
   depends_on "MikkoParkkola/tap/nab"
   depends_on "MikkoParkkola/tap/trvl"
 
-  # axterminator is macOS-only
-  depends_on "MikkoParkkola/tap/axterminator" if OS.mac?
-
   # Shell-based, no arch-specific binary. Bump revision if the setup
   # script changes; Homebrew's bottle logic sees a nil url and skips
   # arch detection for header-only / metapackage formulae.
-  url "https://raw.githubusercontent.com/MikkoParkkola/homebrew-tap/v#{version}/stack-setup"
-  sha256 "0000000000000000000000000000000000000000000000000000000000000000"
 
   def install
     bin.install "stack-setup" => "stack-setup"
@@ -26,7 +24,8 @@ class Stack < Formula
 
   def post_install
     return if OS.linux? # axterminator not available
-    system "xattr", "-dr", "com.apple.quarantine", "#{bin}/stack-setup"
+
+    system "xattr", "-dr", "com.apple.quarantine", bin/"stack-setup"
   rescue
     nil
   end
