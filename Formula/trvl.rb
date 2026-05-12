@@ -5,13 +5,13 @@
 class Trvl < Formula
   desc "AI travel agent — 55 MCP tools for flights, hotels, ground transport, price alerts. Free, no API keys."
   homepage "https://github.com/MikkoParkkola/trvl"
-  version "1.2.1"
+  version "1.2.2"
   license "PolyForm-Noncommercial-1.0.0"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/MikkoParkkola/trvl/releases/download/v1.2.1/trvl_1.2.1_darwin_amd64.tar.gz"
-      sha256 "9c8f01379c7ab2cb4f51ce3e2927f2d5a9344640dc669aa7e71d303c1abd432d"
+      url "https://github.com/MikkoParkkola/trvl/releases/download/v1.2.2/trvl_1.2.2_darwin_amd64.tar.gz"
+      sha256 "339ce88c8cd7073e12612597b87e85e538fcc42c98d1ce8f95c845cdbe2148f8"
 
       define_method(:install) do
         bin.install "trvl"
@@ -28,8 +28,8 @@ class Trvl < Formula
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/MikkoParkkola/trvl/releases/download/v1.2.1/trvl_1.2.1_darwin_arm64.tar.gz"
-      sha256 "c3cc741f292558bf36b3b0f05e191c4ebfa93d227cdacf9895a2a8e0e668447a"
+      url "https://github.com/MikkoParkkola/trvl/releases/download/v1.2.2/trvl_1.2.2_darwin_arm64.tar.gz"
+      sha256 "f736453a297fa8c5f5bcd939ad214d7bd9ce77c3d058061017319a3ff5f211fe"
 
       define_method(:install) do
         bin.install "trvl"
@@ -49,8 +49,8 @@ class Trvl < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/MikkoParkkola/trvl/releases/download/v1.2.1/trvl_1.2.1_linux_amd64.tar.gz"
-      sha256 "a6454bc53f2552b8a713060b8e8232310d4e46af61e83abd410b8c6d16059cb9"
+      url "https://github.com/MikkoParkkola/trvl/releases/download/v1.2.2/trvl_1.2.2_linux_amd64.tar.gz"
+      sha256 "6307abc9e4032a7b1430cb06beefa5298279dbcff52222c163501b8ceb996dc4"
       define_method(:install) do
         bin.install "trvl"
         # Strip com.apple.quarantine that Homebrew applies to downloaded
@@ -66,8 +66,8 @@ class Trvl < Formula
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/MikkoParkkola/trvl/releases/download/v1.2.1/trvl_1.2.1_linux_arm64.tar.gz"
-      sha256 "aaccd6fee3cd8771548dc733240f598e76462c1a48a845ec86f62bc3cb84de32"
+      url "https://github.com/MikkoParkkola/trvl/releases/download/v1.2.2/trvl_1.2.2_linux_arm64.tar.gz"
+      sha256 "f7e014b68cb6ea7da00026962985760617a32719fc12007e80aaab75f5c0d173"
       define_method(:install) do
         bin.install "trvl"
         # Strip com.apple.quarantine that Homebrew applies to downloaded
