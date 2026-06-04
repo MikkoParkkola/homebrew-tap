@@ -11,7 +11,7 @@ class Trvl < Formula
   on_macos do
     if Hardware::CPU.intel?
       url "https://github.com/MikkoParkkola/trvl/releases/download/v1.6.0/trvl_1.6.0_darwin_amd64.tar.gz"
-      sha256 "3b0624977cc39feee90a1ce3444a0b197b58ef863808c5167ca42562dce6e92f"
+      sha256 "4c2f92f9c07b8fb353f9776006b8f54fd4cc918541286cfca89a8eff2ec026c2"
 
       define_method(:install) do
         bin.install "trvl"
@@ -20,7 +20,7 @@ class Trvl < Formula
     end
     if Hardware::CPU.arm?
       url "https://github.com/MikkoParkkola/trvl/releases/download/v1.6.0/trvl_1.6.0_darwin_arm64.tar.gz"
-      sha256 "d80dc1f08cae99d999e9d66e38f8270af34d4479e34a1ae5ce82fd1683212e44"
+      sha256 "eb69d72776a7e15e53ed020b297faf7643f6faa49c408dd665204da424419a31"
 
       define_method(:install) do
         bin.install "trvl"
@@ -32,7 +32,7 @@ class Trvl < Formula
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
       url "https://github.com/MikkoParkkola/trvl/releases/download/v1.6.0/trvl_1.6.0_linux_amd64.tar.gz"
-      sha256 "3884b567a47a9418a725abf6860526643d6e74cf40a09036fa5bbd8a96ad464b"
+      sha256 "a79242682e76ec60e45e01e76c62c1e55905901f79a16957b5cf827ac3e34d26"
       define_method(:install) do
         bin.install "trvl"
         system "xattr", "-dr", "com.apple.quarantine", "#{bin}/trvl" if OS.mac?
@@ -40,7 +40,7 @@ class Trvl < Formula
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
       url "https://github.com/MikkoParkkola/trvl/releases/download/v1.6.0/trvl_1.6.0_linux_arm64.tar.gz"
-      sha256 "2ab14d5b1c745f6f2e41f832b9fdfbd463626304d66d60dc71dce55b0a3408b1"
+      sha256 "2871b3523b2dd85b910397cc9f5c9b965d60fdee788a3f694983184622fbafdc"
       define_method(:install) do
         bin.install "trvl"
         system "xattr", "-dr", "com.apple.quarantine", "#{bin}/trvl" if OS.mac?
