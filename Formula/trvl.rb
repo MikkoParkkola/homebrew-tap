@@ -5,13 +5,13 @@
 class Trvl < Formula
   desc "AI travel agent: flights, hotels and transport via MCP, no API keys"
   homepage "https://github.com/MikkoParkkola/trvl"
-  version "1.8.1"
+  version "1.8.2"
   license "PolyForm-Noncommercial-1.0.0"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/MikkoParkkola/trvl/releases/download/v1.8.1/trvl_1.8.1_darwin_amd64.tar.gz"
-      sha256 "845164a44f76457e3602108bf05addfb93e4ac345650c5f45b64e6fec116651a"
+      url "https://github.com/MikkoParkkola/trvl/releases/download/v1.8.2/trvl_1.8.2_darwin_amd64.tar.gz"
+      sha256 "263bea67d4b2995a75862376618ff319a387b772fa54765b7993fe5da48e41c9"
 
       define_method(:install) do
         bin.install "trvl"
@@ -19,8 +19,8 @@ class Trvl < Formula
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/MikkoParkkola/trvl/releases/download/v1.8.1/trvl_1.8.1_darwin_arm64.tar.gz"
-      sha256 "27ac6777b2cc2b43162a803f5d96e34c401bb4b2f076e80ec8caa1a422ae3010"
+      url "https://github.com/MikkoParkkola/trvl/releases/download/v1.8.2/trvl_1.8.2_darwin_arm64.tar.gz"
+      sha256 "d05c8fd12e80d786e85809b36a3cb5770745c70969e4f467565c135f53a64a1e"
 
       define_method(:install) do
         bin.install "trvl"
@@ -31,16 +31,16 @@ class Trvl < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/MikkoParkkola/trvl/releases/download/v1.8.1/trvl_1.8.1_linux_amd64.tar.gz"
-      sha256 "acad17d1caa1de4bd025c9ae6df348300a22264986ee1fd3e64f6aea6fc1b816"
+      url "https://github.com/MikkoParkkola/trvl/releases/download/v1.8.2/trvl_1.8.2_linux_amd64.tar.gz"
+      sha256 "94ad5645e0b0b694e97c2baf3b82d99d00ed32265bb55b0b24910803dc3fec38"
       define_method(:install) do
         bin.install "trvl"
         system "xattr", "-dr", "com.apple.quarantine", "#{bin}/trvl" if OS.mac?
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/MikkoParkkola/trvl/releases/download/v1.8.1/trvl_1.8.1_linux_arm64.tar.gz"
-      sha256 "f9bb5f1bfed8af8abfc3ce334099013ef53e53df62f06d03b4edda83ee01a5c7"
+      url "https://github.com/MikkoParkkola/trvl/releases/download/v1.8.2/trvl_1.8.2_linux_arm64.tar.gz"
+      sha256 "b5b2815417901757dbd72ed99aac0fade49fc5461a36e04b7595d027a534e009"
       define_method(:install) do
         bin.install "trvl"
         system "xattr", "-dr", "com.apple.quarantine", "#{bin}/trvl" if OS.mac?
