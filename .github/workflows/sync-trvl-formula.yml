@@ -1,0 +1,64 @@
+name: Sync trvl formula
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "trvl version without leading v; defaults to latest release"
+        required: false
+  schedule:
+    - cron: "17 * * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout tap
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+
+      - name: Resolve trvl version
+        id: version
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REQUESTED_VERSION: ${{ github.event.inputs.version }}
+        run: |
+          if [ -n "${REQUESTED_VERSION}" ]; then
+            version="${REQUESTED_VERSION#v}"
+          else
+            tag="$(gh release view --repo MikkoParkkola/trvl --json tagName --jq .tagName)"
+            version="${tag#v}"
+          fi
+          echo "version=${version}" >> "$GITHUB_OUTPUT"
+
+      - name: Download trvl release checksums
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p dist
+          gh release download "v${{ steps.version.outputs.version }}" \
+            --repo MikkoParkkola/trvl \
+            --pattern checksums.txt \
+            --dir dist \
+            --clobber
+
+      - name: Update Formula/trvl.rb
+        run: |
+          ruby scripts/update_trvl_formula.rb Formula/trvl.rb "${{ steps.version.outputs.version }}" dist/checksums.txt
+          ruby -c Formula/trvl.rb
+          grep -F "version \"${{ steps.version.outputs.version }}\"" Formula/trvl.rb
+
+      - name: Commit formula update
+        run: |
+          version="${{ steps.version.outputs.version }}"
+          if git diff --quiet -- Formula/trvl.rb; then
+            echo "Formula/trvl.rb already matches ${version}."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Formula/trvl.rb
+          git commit -m "Update trvl formula to v${version}"
+          git push
