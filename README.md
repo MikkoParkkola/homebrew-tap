@@ -6,10 +6,16 @@ macOS-only; the other formulae support both macOS and Linux.
 
 ```bash
 brew tap MikkoParkkola/tap
+brew trust --tap MikkoParkkola/tap   # Homebrew 6.0+
 ```
 
 You only need to tap once. After that, install any of the formulae below
 with a single `brew install` line.
+
+The `brew trust` step is for Homebrew 6.0 and newer, which can require
+third-party taps to be trusted before their code runs. It is required if
+you have tap trust enabled (`HOMEBREW_REQUIRE_TAP_TRUST`), and harmless to
+run otherwise. On older Homebrew versions, skip it.
 
 ## What's in here
 
@@ -26,6 +32,7 @@ with a single `brew install` line.
 
 ```bash
 brew tap MikkoParkkola/tap
+brew trust --tap MikkoParkkola/tap   # Homebrew 6.0+
 brew install MikkoParkkola/tap/stack
 stack-setup
 ```
