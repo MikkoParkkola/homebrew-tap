@@ -3,7 +3,7 @@
 
 formula_path, version, checksums_path = ARGV
 
-unless formula_path && version && checksums_path
+if !formula_path || !version || !checksums_path
   warn "usage: update_trvl_formula.rb FORMULA_PATH VERSION CHECKSUMS_PATH"
   exit 2
 end
@@ -33,7 +33,7 @@ end
 
 content = File.read(formula_path)
 
-unless content.sub!(/version "[^"]+"/, %(version "#{version}"))
+unless content.sub!(/version "[^"]+"/, %Q(version "#{version}"))
   warn "failed to update version in #{formula_path}"
   exit 1
 end
@@ -51,7 +51,7 @@ platforms.each do |platform|
     \n(\s+)sha256\ "[0-9a-f]{64}"
   }x
 
-  replacement = %(url "https://github.com/MikkoParkkola/trvl/releases/download/v#{version}/#{filename}"\n\\1sha256 "#{sha256}")
+  replacement = %Q(url "https://github.com/MikkoParkkola/trvl/releases/download/v#{version}/#{filename}"\n\\1sha256 "#{sha256}")
   unless content.gsub!(pattern, replacement)
     warn "failed to update #{platform} block in #{formula_path}"
     exit 1
