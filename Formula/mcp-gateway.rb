@@ -1,28 +1,28 @@
 class McpGateway < Formula
   desc "Universal MCP gateway — single port for all your MCP servers, ~95% token savings"
   homepage "https://github.com/MikkoParkkola/mcp-gateway"
-  version "3.1.2"
+  version "3.1.3"
   license "MIT"
 
   on_macos do
     on_arm do
-      url "https://github.com/MikkoParkkola/mcp-gateway/releases/download/v3.1.2/mcp-gateway-darwin-arm64"
-      sha256 "fcae21444a463200353534bca5febf74ada3d3eb92384717be3380f3d516d2b5"
+      url "https://github.com/MikkoParkkola/mcp-gateway/releases/download/v3.1.3/mcp-gateway-darwin-arm64"
+      sha256 "b89ce035a289c99581796bcb16978b4a87a4c253cd201b0ee4ce54382a3c1890"
     end
     on_intel do
-      url "https://github.com/MikkoParkkola/mcp-gateway/releases/download/v3.1.2/mcp-gateway-darwin-x86_64"
-      sha256 "a7348784ddcaeaf4f75acb4704d6db7bcbb9318f77a80125524d18b94f7ef438"
+      url "https://github.com/MikkoParkkola/mcp-gateway/releases/download/v3.1.3/mcp-gateway-darwin-x86_64"
+      sha256 "cbdc81d1c3e5db5d6e15d111441378d4fa98f6f6344112efa4de0a8e2f425990"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/MikkoParkkola/mcp-gateway/releases/download/v3.1.2/mcp-gateway-linux-aarch64"
-      sha256 "f0d56c4b72c7bd0f0925112ca20cb5fac17e9ac093753bbb0410eed5df45cb28"
+      url "https://github.com/MikkoParkkola/mcp-gateway/releases/download/v3.1.3/mcp-gateway-linux-aarch64"
+      sha256 "ba89d60f9da847f3a9ce27aeefdc5c78cbd36338e2715d79bea1522c46ae3cbe"
     end
     on_intel do
-      url "https://github.com/MikkoParkkola/mcp-gateway/releases/download/v3.1.2/mcp-gateway-linux-x86_64"
-      sha256 "687d941dea39b2c824d1f0861002d4be68113986e4b862b326a7de0a82e7c908"
+      url "https://github.com/MikkoParkkola/mcp-gateway/releases/download/v3.1.3/mcp-gateway-linux-x86_64"
+      sha256 "51a5c5d539e37a0c315b44909f4207aa04e20cfb1968a1ba67e0defa87012da1"
     end
   end
 
