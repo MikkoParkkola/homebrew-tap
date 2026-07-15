@@ -1,30 +1,30 @@
 class McpGateway < Formula
   desc "Universal MCP gateway — single port for all your MCP servers, ~95% token savings"
   homepage "https://github.com/MikkoParkkola/mcp-gateway"
-  version "3.3.1"
+  version "3.3.2"
   # Mixed, per-file licensing (PolyForm-Noncommercial default + MIT core);
   # SPDX can't express it. See LICENSES.md / COMMERCIAL.md.
   license :cannot_represent
 
   on_macos do
     on_arm do
-      url "https://github.com/MikkoParkkola/mcp-gateway/releases/download/v3.3.1/mcp-gateway-darwin-arm64"
-      sha256 "f90f42ad951020a1a58631c4c39eb31240d8e00316489e63c123a4cbf04327d7"
+      url "https://github.com/MikkoParkkola/mcp-gateway/releases/download/v3.3.2/mcp-gateway-darwin-arm64"
+      sha256 "d163c5834a74297797f9462891b4a610fab4bc87a759466ccdfad32ea21f6f5f"
     end
     on_intel do
-      url "https://github.com/MikkoParkkola/mcp-gateway/releases/download/v3.3.1/mcp-gateway-darwin-x86_64"
-      sha256 "9f11696121de60ce1c3a1c99d1ff618de4a1ef0ed6243fe06866b3837007b22c"
+      url "https://github.com/MikkoParkkola/mcp-gateway/releases/download/v3.3.2/mcp-gateway-darwin-x86_64"
+      sha256 "aa48b93898777cdee0a253e6226e0372937afeab3004b0841775ed72461f894a"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/MikkoParkkola/mcp-gateway/releases/download/v3.3.1/mcp-gateway-linux-aarch64"
-      sha256 "b0bd16a8e43a42ee738b512ab6eb7de5d466c84dbdcff2a42f75ea4eb9d61874"
+      url "https://github.com/MikkoParkkola/mcp-gateway/releases/download/v3.3.2/mcp-gateway-linux-aarch64"
+      sha256 "70888b7bc5bf26122d0608f48f4bad88f36c57e44374b8c0d7d3b1a3340ca5a8"
     end
     on_intel do
-      url "https://github.com/MikkoParkkola/mcp-gateway/releases/download/v3.3.1/mcp-gateway-linux-x86_64"
-      sha256 "3d490d8e5139a299db6b975726e4c8c09320f90d1ed3279bf2b7519f4bc5a338"
+      url "https://github.com/MikkoParkkola/mcp-gateway/releases/download/v3.3.2/mcp-gateway-linux-x86_64"
+      sha256 "d986004c1d37519cda7991fafb4327af28db4405570b040a59a9036b27b37030"
     end
   end
 
