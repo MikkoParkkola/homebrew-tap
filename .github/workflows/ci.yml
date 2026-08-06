@@ -25,6 +25,9 @@ jobs:
       - name: Tap local repository
         run: brew tap local/homebrew-quality "$GITHUB_WORKSPACE"
 
+      - name: Trust local repository
+        run: brew trust local/quality
+
       - name: Style
         run: brew style local/homebrew-quality
 
@@ -43,6 +46,9 @@ jobs:
 
       - name: Tap local repository
         run: brew tap local/homebrew-quality "$GITHUB_WORKSPACE"
+
+      - name: Trust local repository
+        run: brew trust local/quality
 
       - name: Fetch release artifact
         run: HOMEBREW_NO_INSTALL_FROM_API=1 brew fetch --force --retry "local/homebrew-quality/${{ matrix.formula }}"
