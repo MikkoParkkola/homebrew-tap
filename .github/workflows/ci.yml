@@ -20,10 +20,13 @@ jobs:
   validate-formulae:
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Tap local repository
         run: brew tap local/homebrew-quality "$GITHUB_WORKSPACE"
+
+      - name: Trust local repository
+        run: brew trust local/quality
 
       - name: Style
         run: brew style local/homebrew-quality
@@ -39,10 +42,13 @@ jobs:
       matrix:
         formula: [axterminator, mcp-gateway, nab, nowifi, trvl]
     steps:
-      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Tap local repository
         run: brew tap local/homebrew-quality "$GITHUB_WORKSPACE"
+
+      - name: Trust local repository
+        run: brew trust local/quality
 
       - name: Fetch release artifact
         run: HOMEBREW_NO_INSTALL_FROM_API=1 brew fetch --force --retry "local/homebrew-quality/${{ matrix.formula }}"
