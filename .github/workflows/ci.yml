@@ -18,7 +18,7 @@ env:
 
 jobs:
   validate-formulae:
-    runs-on: macos-latest
+    runs-on: avrea-macos-26-8-vcpu
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
@@ -36,7 +36,7 @@ jobs:
 
   verify-downloads:
     name: Verify downloads (${{ matrix.formula }})
-    runs-on: macos-latest
+    runs-on: avrea-macos-26-8-vcpu
     strategy:
       fail-fast: false
       matrix:
@@ -52,3 +52,25 @@ jobs:
 
       - name: Fetch release artifact
         run: HOMEBREW_NO_INSTALL_FROM_API=1 brew fetch --force --retry "local/homebrew-quality/${{ matrix.formula }}"
+
+  install-and-test:
+    name: Install and test (${{ matrix.formula }})
+    runs-on: avrea-macos-26-8-vcpu
+    strategy:
+      fail-fast: false
+      matrix:
+        formula: [mcp-gateway, nab, stack]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Tap local repository
+        run: brew tap local/homebrew-quality "$GITHUB_WORKSPACE"
+
+      - name: Trust local repository
+        run: brew trust local/quality
+
+      - name: Install formula
+        run: HOMEBREW_NO_INSTALL_FROM_API=1 brew install "local/homebrew-quality/${{ matrix.formula }}"
+
+      - name: Run formula test
+        run: HOMEBREW_NO_INSTALL_FROM_API=1 brew test "local/homebrew-quality/${{ matrix.formula }}"

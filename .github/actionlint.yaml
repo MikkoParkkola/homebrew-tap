@@ -1,0 +1,3 @@
+self-hosted-runner:
+  labels:
+    - avrea-macos-26-8-vcpu

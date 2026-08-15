@@ -44,12 +44,6 @@ class McpGateway < Formula
     end
   end
 
-  def post_install
-    system "xattr", "-dr", "com.apple.quarantine", "#{bin}/mcp-gateway" if OS.mac?
-  rescue
-    nil
-  end
-
   def caveats
     <<~CAVEATS
       Licensing: mcp-gateway uses mixed, per-file licensing; the runnable
