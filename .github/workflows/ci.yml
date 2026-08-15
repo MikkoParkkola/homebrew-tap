@@ -18,7 +18,7 @@ env:
 
 jobs:
   validate-formulae:
-    runs-on: macos-latest
+    runs-on: avrea-macos-26-8-vcpu
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
@@ -28,15 +28,38 @@ jobs:
       - name: Trust local repository
         run: brew trust local/quality
 
+      - name: Test trvl formula updater
+        run: ruby test/update_trvl_formula_test.rb
+
       - name: Style
         run: brew style local/homebrew-quality
 
       - name: Audit
-        run: brew audit --strict --online --tap local/homebrew-quality
+        run: |
+          formulae=()
+          for formula_path in Formula/*.rb; do
+            formula_name="$(basename "${formula_path}" .rb)"
+            if [ "${formula_name}" != "mcp-gateway" ]; then
+              formulae+=("local/homebrew-quality/${formula_name}")
+            fi
+          done
+          brew audit --strict --online --formula "${formulae[@]}"
+          # Conditional architecture URLs make clean installs detect `64`, even
+          # though the generic URL auditor considers the required version redundant.
+          brew audit --strict --online --except=version --formula local/homebrew-quality/mcp-gateway
+
+      - name: Smoke-test stack package
+        # Resolve the qualified dependency names from the production tap, but
+        # install only this candidate tap's package in isolation.
+        run: |
+          brew tap mikkoparkkola/tap
+          brew trust mikkoparkkola/tap
+          brew install --ignore-dependencies local/homebrew-quality/stack
+          stack-setup --help
 
   verify-downloads:
     name: Verify downloads (${{ matrix.formula }})
-    runs-on: macos-latest
+    runs-on: avrea-macos-26-8-vcpu
     strategy:
       fail-fast: false
       matrix:
@@ -51,4 +74,29 @@ jobs:
         run: brew trust local/quality
 
       - name: Fetch release artifact
-        run: HOMEBREW_NO_INSTALL_FROM_API=1 brew fetch --force --retry "local/homebrew-quality/${{ matrix.formula }}"
+        run: HOMEBREW_NO_INSTALL_FROM_API=1 brew fetch --force --retry --os all --arch all "local/homebrew-quality/${{ matrix.formula }}"
+
+  install-and-test:
+    name: Install and test (${{ matrix.formula }})
+    runs-on: avrea-macos-26-8-vcpu
+    strategy:
+      fail-fast: false
+      matrix:
+        formula: [mcp-gateway, nab]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Tap local repository
+        run: brew tap local/homebrew-quality "$GITHUB_WORKSPACE"
+
+      - name: Trust local repository
+        run: brew trust local/quality
+
+      - name: Install formula
+        run: HOMEBREW_NO_INSTALL_FROM_API=1 brew install "local/homebrew-quality/${{ matrix.formula }}"
+
+      - name: Reinstall formula
+        run: HOMEBREW_NO_INSTALL_FROM_API=1 brew reinstall "local/homebrew-quality/${{ matrix.formula }}"
+
+      - name: Run formula test
+        run: HOMEBREW_NO_INSTALL_FROM_API=1 brew test "local/homebrew-quality/${{ matrix.formula }}"

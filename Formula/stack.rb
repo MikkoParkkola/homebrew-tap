@@ -22,14 +22,6 @@ class Stack < Formula
     bin.install "stack-setup" => "stack-setup"
   end
 
-  def post_install
-    return if OS.linux? # axterminator not available
-
-    system "xattr", "-dr", "com.apple.quarantine", bin/"stack-setup"
-  rescue
-    nil
-  end
-
   def caveats
     <<~EOS
       The sovereign stack is installed! Next step:

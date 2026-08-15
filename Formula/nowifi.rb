@@ -5,7 +5,6 @@
 class Nowifi < Formula
   desc "WiFi security assessment tool for captive portals and WPA audits"
   homepage "https://github.com/MikkoParkkola/nowifi"
-  version "0.16.1"
   license "AGPL-3.0-or-later"
 
   on_macos do

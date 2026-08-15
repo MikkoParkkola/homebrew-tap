@@ -1,6 +1,8 @@
 class McpGateway < Formula
   desc "Universal MCP gateway — single port for all your MCP servers, ~95% token savings"
   homepage "https://github.com/MikkoParkkola/mcp-gateway"
+  # Required because the artifact basename ends in the architecture (arm64/x86_64),
+  # which a clean Homebrew install can otherwise mis-detect as the version.
   version "3.4.0"
   # Mixed, per-file licensing (PolyForm-Noncommercial default + MIT core);
   # SPDX can't express it. See LICENSES.md / COMMERCIAL.md.
@@ -42,12 +44,6 @@ class McpGateway < Formula
         bin.install "mcp-gateway-linux-x86_64" => "mcp-gateway"
       end
     end
-  end
-
-  def post_install
-    system "xattr", "-dr", "com.apple.quarantine", "#{bin}/mcp-gateway" if OS.mac?
-  rescue
-    nil
   end
 
   def caveats
