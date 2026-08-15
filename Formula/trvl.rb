@@ -51,6 +51,6 @@ class Trvl < Formula
   end
 
   test do
-    system "#{bin}/trvl", "version"
+    system bin/"trvl", "version"
   end
 end

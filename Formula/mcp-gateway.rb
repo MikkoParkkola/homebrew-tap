@@ -1,6 +1,9 @@
 class McpGateway < Formula
   desc "Universal MCP gateway — single port for all your MCP servers, ~95% token savings"
   homepage "https://github.com/MikkoParkkola/mcp-gateway"
+  # Required because the artifact basename ends in the architecture (arm64/x86_64),
+  # which a clean Homebrew install can otherwise mis-detect as the version.
+  version "3.4.0"
   # Mixed, per-file licensing (PolyForm-Noncommercial default + MIT core);
   # SPDX can't express it. See LICENSES.md / COMMERCIAL.md.
   license :cannot_represent

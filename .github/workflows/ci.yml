@@ -35,12 +35,25 @@ jobs:
         run: brew style local/homebrew-quality
 
       - name: Audit
-        run: brew audit --strict --online --tap local/homebrew-quality
+        run: |
+          formulae=()
+          for formula_path in Formula/*.rb; do
+            formula_name="$(basename "${formula_path}" .rb)"
+            if [ "${formula_name}" != "mcp-gateway" ]; then
+              formulae+=("local/homebrew-quality/${formula_name}")
+            fi
+          done
+          brew audit --strict --online --formula "${formulae[@]}"
+          # Conditional architecture URLs make clean installs detect `64`, even
+          # though the generic URL auditor considers the required version redundant.
+          brew audit --strict --online --except=version --formula local/homebrew-quality/mcp-gateway
 
       - name: Smoke-test stack package
-        # Stack's dependencies intentionally point at the production tap. Skip
-        # them here so this candidate tap exercises its own package in isolation.
+        # Resolve the qualified dependency names from the production tap, but
+        # install only this candidate tap's package in isolation.
         run: |
+          brew tap mikkoparkkola/tap
+          brew trust mikkoparkkola/tap
           brew install --ignore-dependencies local/homebrew-quality/stack
           stack-setup --help
 
