@@ -48,7 +48,7 @@ jobs:
         run: |
           ruby scripts/update_trvl_formula.rb Formula/trvl.rb "${{ steps.version.outputs.version }}" dist/checksums.txt
           ruby -c Formula/trvl.rb
-          test "$(grep -c "/v${{ steps.version.outputs.version }}/trvl_${{ steps.version.outputs.version }}_" Formula/trvl.rb)" -eq 4
+          test "$(grep -Fc "/v${{ steps.version.outputs.version }}/trvl_${{ steps.version.outputs.version }}_" Formula/trvl.rb)" -eq 4
           ! grep -Eq '^\s*version\s+"' Formula/trvl.rb
 
       - name: Commit formula update
