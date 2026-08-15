@@ -34,6 +34,13 @@ jobs:
       - name: Audit
         run: brew audit --strict --online --tap local/homebrew-quality
 
+      - name: Smoke-test stack package
+        # Stack's dependencies intentionally point at the production tap. Skip
+        # them here so this candidate tap exercises its own package in isolation.
+        run: |
+          brew install --ignore-dependencies local/homebrew-quality/stack
+          stack-setup --help
+
   verify-downloads:
     name: Verify downloads (${{ matrix.formula }})
     runs-on: avrea-macos-26-8-vcpu
