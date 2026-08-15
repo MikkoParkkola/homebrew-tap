@@ -5,7 +5,6 @@
 class Trvl < Formula
   desc "AI travel agent: flights, hotels and transport via MCP, no API keys"
   homepage "https://github.com/MikkoParkkola/trvl"
-  version "1.21.4"
   license "PolyForm-Noncommercial-1.0.0"
 
   on_macos do
