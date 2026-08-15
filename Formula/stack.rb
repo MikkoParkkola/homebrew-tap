@@ -9,10 +9,10 @@ class Stack < Formula
   # Metapackage — depends on the four public tools in the sovereign stack.
   # hebb is not yet available via Homebrew (pending public release).
   # Installing this formula pulls every available dependency via Homebrew.
-  depends_on "MikkoParkkola/tap/axterminator" if OS.mac?
-  depends_on "MikkoParkkola/tap/mcp-gateway"
-  depends_on "MikkoParkkola/tap/nab"
-  depends_on "MikkoParkkola/tap/trvl"
+  depends_on "axterminator" if OS.mac?
+  depends_on "mcp-gateway"
+  depends_on "nab"
+  depends_on "trvl"
 
   # Shell-based, no arch-specific binary. Bump revision if the setup
   # script changes; Homebrew's bottle logic sees a nil url and skips
