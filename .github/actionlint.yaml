@@ -1,3 +1,4 @@
 self-hosted-runner:
   labels:
+    - avrea-ubuntu-latest-4-vcpu
     - avrea-macos-26-8-vcpu

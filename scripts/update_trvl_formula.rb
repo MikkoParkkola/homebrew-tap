@@ -33,11 +33,6 @@ end
 
 content = File.read(formula_path)
 
-unless content.sub!(/version "[^"]+"/, %Q(version "#{version}"))
-  warn "failed to update version in #{formula_path}"
-  exit 1
-end
-
 platforms.each do |platform|
   filename = "trvl_#{version}_#{platform}.tar.gz"
   sha256 = checksums[filename]

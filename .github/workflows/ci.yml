@@ -28,6 +28,9 @@ jobs:
       - name: Trust local repository
         run: brew trust local/quality
 
+      - name: Test trvl formula updater
+        run: ruby test/update_trvl_formula_test.rb
+
       - name: Style
         run: brew style local/homebrew-quality
 
@@ -58,7 +61,7 @@ jobs:
         run: brew trust local/quality
 
       - name: Fetch release artifact
-        run: HOMEBREW_NO_INSTALL_FROM_API=1 brew fetch --force --retry "local/homebrew-quality/${{ matrix.formula }}"
+        run: HOMEBREW_NO_INSTALL_FROM_API=1 brew fetch --force --retry --os all --arch all "local/homebrew-quality/${{ matrix.formula }}"
 
   install-and-test:
     name: Install and test (${{ matrix.formula }})
@@ -78,6 +81,9 @@ jobs:
 
       - name: Install formula
         run: HOMEBREW_NO_INSTALL_FROM_API=1 brew install "local/homebrew-quality/${{ matrix.formula }}"
+
+      - name: Reinstall formula
+        run: HOMEBREW_NO_INSTALL_FROM_API=1 brew reinstall "local/homebrew-quality/${{ matrix.formula }}"
 
       - name: Run formula test
         run: HOMEBREW_NO_INSTALL_FROM_API=1 brew test "local/homebrew-quality/${{ matrix.formula }}"
