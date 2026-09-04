@@ -9,23 +9,23 @@ class Nowifi < Formula
 
   on_macos do
     on_arm do
-      url "https://github.com/MikkoParkkola/nowifi/releases/download/v0.16.1/nowifi-darwin-arm64.tar.gz"
-      sha256 "414ef05132e8d023e9703157cafcb7fd9059c6bb73ac85752bec9a60f3e843d7"
+      url "https://github.com/MikkoParkkola/nowifi/releases/download/v0.16.2/nowifi-darwin-arm64.tar.gz"
+      sha256 "18bc74cbe66559a12f4908cf0830abbd288cae529670d15e41f9b88b05c01e7b"
     end
     on_intel do
-      url "https://github.com/MikkoParkkola/nowifi/releases/download/v0.16.1/nowifi-darwin-amd64.tar.gz"
-      sha256 "e03f7ceeb14c7bd3e6d8bd07393291a48790ef7e2bbd4197dbb6ee9c1a44ae92"
+      url "https://github.com/MikkoParkkola/nowifi/releases/download/v0.16.2/nowifi-darwin-amd64.tar.gz"
+      sha256 "4f0cfaa083b34072505d5295d9b901f8a23850b57a571e7860a57bd427692120"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/MikkoParkkola/nowifi/releases/download/v0.16.1/nowifi-linux-arm64.tar.gz"
-      sha256 "cab76254db4f2e5d55d4f86a23fce64fcd3e542cc678e0b505920458ac06b4d2"
+      url "https://github.com/MikkoParkkola/nowifi/releases/download/v0.16.2/nowifi-linux-arm64.tar.gz"
+      sha256 "7dcf329712509042076c42f818828842c9242869219a77e053441ca967803448"
     end
     on_intel do
-      url "https://github.com/MikkoParkkola/nowifi/releases/download/v0.16.1/nowifi-linux-amd64.tar.gz"
-      sha256 "bfd6d33c7f11db9ddffd575cb8ea686c74c262683a1e4311a39c5a66916869c6"
+      url "https://github.com/MikkoParkkola/nowifi/releases/download/v0.16.2/nowifi-linux-amd64.tar.gz"
+      sha256 "e6828662b5ce175d3592ac9a3030b88da0ac81e3178ac283df45d28b0f7ee8f2"
     end
   end
 
