@@ -36,30 +36,47 @@ jobs:
       - name: Download trvl release checksums
         env:
           GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.version.outputs.version }}
         run: |
+          set -euo pipefail
           mkdir -p dist
-          gh release download "v${{ steps.version.outputs.version }}" \
+          gh release download "v${VERSION}" \
             --repo MikkoParkkola/trvl \
             --pattern checksums.txt \
             --dir dist \
             --clobber
 
       - name: Update Formula/trvl.rb
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
         run: |
-          ruby scripts/update_trvl_formula.rb Formula/trvl.rb "${{ steps.version.outputs.version }}" dist/checksums.txt
+          set -euo pipefail
+          ruby scripts/update_trvl_formula.rb Formula/trvl.rb "${VERSION}" dist/checksums.txt
+
+      - name: Validate Homebrew Formula
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          set -euo pipefail
           ruby -c Formula/trvl.rb
-          test "$(grep -Fc "/v${{ steps.version.outputs.version }}/trvl_${{ steps.version.outputs.version }}_" Formula/trvl.rb)" -eq 4
-          ! grep -Eq '^\s*version\s+"' Formula/trvl.rb
+          test "$(grep -Fc "/v${VERSION}/trvl_${VERSION}_" Formula/trvl.rb)" -eq 4
+          if grep -Eq '^[[:space:]]*version[[:space:]]+' Formula/trvl.rb; then
+            echo "::error::explicit version is not allowed in the TRVL formula" >&2
+            exit 1
+          fi
+          git diff --check -- Formula/trvl.rb
 
       - name: Commit formula update
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
         run: |
-          version="${{ steps.version.outputs.version }}"
+          set -euo pipefail
           if git diff --quiet -- Formula/trvl.rb; then
-            echo "Formula/trvl.rb already matches ${version}."
+            echo "Formula/trvl.rb already matches ${VERSION}."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add Formula/trvl.rb
-          git commit -m "Update trvl formula to v${version}"
+          git commit -m "Update trvl formula to v${VERSION}"
           git push
