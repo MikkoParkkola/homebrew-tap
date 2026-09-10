@@ -33,6 +33,20 @@ end
 
 content = File.read(formula_path)
 
+# Normalize only the redundant standalone form; reject ambiguity before writing.
+version_lines = content.lines.grep(/\A[ \t]*version[ \t]+/)
+if version_lines.length > 1
+  warn "multiple version declarations in #{formula_path}"
+  exit 1
+end
+if (version_line = version_lines.first)
+  unless version_line.match?(/\A[ \t]*version[ \t]+"[^"\r\n]+"[ \t]*(?:\r?\n)?\z/)
+    warn "unsupported version declaration in #{formula_path}"
+    exit 1
+  end
+  content.sub!(version_line, "")
+end
+
 platforms.each do |platform|
   filename = "trvl_#{version}_#{platform}.tar.gz"
   sha256 = checksums[filename]
