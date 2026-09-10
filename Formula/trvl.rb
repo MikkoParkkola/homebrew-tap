@@ -7,7 +7,6 @@ class Trvl < Formula
   desc "AI travel agent: flights, hotels and transport via MCP, no API keys"
   homepage "https://github.com/MikkoParkkola/trvl"
   license "PolyForm-Noncommercial-1.0.0"
-  version "1.21.6"
 
   on_macos do
     if Hardware::CPU.intel?
