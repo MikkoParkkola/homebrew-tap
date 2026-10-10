@@ -1,8 +1,8 @@
 class Axterminator < Formula
   desc "Background-first macOS GUI automation with MCP server support"
   homepage "https://github.com/MikkoParkkola/axterminator"
-  url "https://github.com/MikkoParkkola/axterminator/archive/refs/tags/v0.10.2.tar.gz"
-  sha256 "11c6ee6f471a09b414ab1ef470985fc65bc8e24d722ce6f4afbee28691cbe31c"
+  url "https://github.com/MikkoParkkola/axterminator/archive/refs/tags/v0.11.0.tar.gz"
+  sha256 "899ade490ed0ad91f7ad851e23697904923f074b4bea78964f9ca031090fdd13"
   license :cannot_represent
 
   depends_on "rust" => :build
