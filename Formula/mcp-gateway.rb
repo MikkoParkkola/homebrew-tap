@@ -3,30 +3,30 @@ class McpGateway < Formula
   homepage "https://github.com/MikkoParkkola/mcp-gateway"
   # Required because the artifact basename ends in the architecture (arm64/x86_64),
   # which a clean Homebrew install can otherwise mis-detect as the version.
-  version "3.5.1"
+  version "3.5.2"
   # Mixed, per-file licensing (PolyForm-Noncommercial default + MIT core);
   # SPDX can't express it. See LICENSES.md / COMMERCIAL.md.
   license :cannot_represent
 
   on_macos do
     on_arm do
-      url "https://github.com/MikkoParkkola/mcp-gateway/releases/download/v3.5.1/mcp-gateway-darwin-arm64"
-      sha256 "78fc2fdb5a56539a35b9204e704374303f140ed91f933492f92f49acdece77b1"
+      url "https://github.com/MikkoParkkola/mcp-gateway/releases/download/v3.5.2/mcp-gateway-darwin-arm64"
+      sha256 "c6d5da083a36bfcfecd46681374e9c8c2060b58fb8561854e596c2039b3e1a7b"
     end
     on_intel do
-      url "https://github.com/MikkoParkkola/mcp-gateway/releases/download/v3.5.1/mcp-gateway-darwin-x86_64"
-      sha256 "c7466255249ca5d3119195bff10e64095a39c9ef05066410e5fcf46f6e08f3d7"
+      url "https://github.com/MikkoParkkola/mcp-gateway/releases/download/v3.5.2/mcp-gateway-darwin-x86_64"
+      sha256 "f688827de3d999d57f55f17b93f6e64f618d68b0ac92167f4374b0720cea6341"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/MikkoParkkola/mcp-gateway/releases/download/v3.5.1/mcp-gateway-linux-aarch64"
-      sha256 "76bcc9eb30b4aa7b7740f0c9dfa9e8dcc0d49b38a9e454ab4b48873493cfdc70"
+      url "https://github.com/MikkoParkkola/mcp-gateway/releases/download/v3.5.2/mcp-gateway-linux-aarch64"
+      sha256 "879fc205a14b20afdfa369269eca3c400d3294a0c410e2279a489e595732fc09"
     end
     on_intel do
-      url "https://github.com/MikkoParkkola/mcp-gateway/releases/download/v3.5.1/mcp-gateway-linux-x86_64"
-      sha256 "198b2d7a134286baeb4b42228436325fdf597c804a9d108fc83b1cb77fe7e157"
+      url "https://github.com/MikkoParkkola/mcp-gateway/releases/download/v3.5.2/mcp-gateway-linux-x86_64"
+      sha256 "f359f3900f14eca674c10c83a6c37808369244a7a5865aded5b642a00ba45dc5"
     end
   end
 
