@@ -10,16 +10,16 @@ class Trvl < Formula
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/MikkoParkkola/trvl/releases/download/v1.28.3/trvl_1.28.3_darwin_amd64.tar.gz"
-      sha256 "2b35b19ea4a3d00f4584135c393abcd0bc6c7cca36610b8a2bde49a5b3ae6af3"
+      url "https://github.com/MikkoParkkola/trvl/releases/download/v1.28.4/trvl_1.28.4_darwin_amd64.tar.gz"
+      sha256 "00d8fd143019abc96d74c0c40fad6232826c13d33243a97373344249d84445f7"
 
       define_method(:install) do
         bin.install "trvl"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/MikkoParkkola/trvl/releases/download/v1.28.3/trvl_1.28.3_darwin_arm64.tar.gz"
-      sha256 "03775d590fee668c06380cb3d182719918e3168f5f03a365455bb7452577ffc8"
+      url "https://github.com/MikkoParkkola/trvl/releases/download/v1.28.4/trvl_1.28.4_darwin_arm64.tar.gz"
+      sha256 "eb368fb1f976de97bdb803a9fcac64b9ae402dd75c010bf598ce06e71027e2d1"
 
       define_method(:install) do
         bin.install "trvl"
@@ -29,15 +29,15 @@ class Trvl < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/MikkoParkkola/trvl/releases/download/v1.28.3/trvl_1.28.3_linux_amd64.tar.gz"
-      sha256 "b6a239e9bba1c04c1f73787eac79a3ae60eb78ed754850b9f5671834c0398b7e"
+      url "https://github.com/MikkoParkkola/trvl/releases/download/v1.28.4/trvl_1.28.4_linux_amd64.tar.gz"
+      sha256 "4164140cb64f0aa1d184453a5714d3c954109c9b87bf09aac06af47c20bfe370"
       define_method(:install) do
         bin.install "trvl"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/MikkoParkkola/trvl/releases/download/v1.28.3/trvl_1.28.3_linux_arm64.tar.gz"
-      sha256 "159d35e965c65cca15a1bb878ee8fb2c29b9f5e0cccb4b6ed8e4f51a709b738f"
+      url "https://github.com/MikkoParkkola/trvl/releases/download/v1.28.4/trvl_1.28.4_linux_arm64.tar.gz"
+      sha256 "9bc8abfe9a6ffb75236f44ca1fc2f94e5837e835b0571eb03cd58b5a2dfa8e1d"
       define_method(:install) do
         bin.install "trvl"
       end
