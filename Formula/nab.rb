@@ -5,23 +5,23 @@ class Nab < Formula
 
   on_macos do
     on_arm do
-      url "https://github.com/MikkoParkkola/nab/releases/download/v0.13.1/nab-aarch64-apple-darwin"
-      sha256 "7b2a35e2c1cce321f5f021dff254bda467619e867d6f87d9c223264eaa2da072"
+      url "https://github.com/MikkoParkkola/nab/releases/download/v0.13.3/nab-aarch64-apple-darwin"
+      sha256 "12f0a7f9ebbe593ca857298a80476d3a0639ae8dc17a148025f23316314d2855"
     end
     on_intel do
-      url "https://github.com/MikkoParkkola/nab/releases/download/v0.13.1/nab-x86_64-apple-darwin"
-      sha256 "5899acacf4325fb1045ec3967d01aa6b6ed9b2445d3d2d9d9a41512af0a26118"
+      url "https://github.com/MikkoParkkola/nab/releases/download/v0.13.3/nab-x86_64-apple-darwin"
+      sha256 "7333ca979bac57f7fb0ca338e3db372c3b0264b630d609f254b433368456b2ff"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/MikkoParkkola/nab/releases/download/v0.13.1/nab-aarch64-unknown-linux-gnu"
-      sha256 "f4424a1abd8f69a41c1816cd03c6bbf138ad9dfe13335170bb9bef2f67e0e0d7"
+      url "https://github.com/MikkoParkkola/nab/releases/download/v0.13.3/nab-aarch64-unknown-linux-gnu"
+      sha256 "a180d8d42fbc216fb498bbb4187d2a5a6274b4134b5631a0d57c35eeb288c223"
     end
     on_intel do
-      url "https://github.com/MikkoParkkola/nab/releases/download/v0.13.1/nab-x86_64-unknown-linux-gnu"
-      sha256 "d72a49655736c57b4ed601f5fe424e3f635e2fe0a7b7d0ebb2c814dae580d951"
+      url "https://github.com/MikkoParkkola/nab/releases/download/v0.13.3/nab-x86_64-unknown-linux-gnu"
+      sha256 "b1b0669ad61e45814b8bb96195f1e97c7797a33c1337dddaa734681dc907117a"
     end
   end
 
